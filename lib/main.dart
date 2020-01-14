@@ -3,6 +3,7 @@ import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(new MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: new MyApp(),
   ));
 }
@@ -15,17 +16,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
+    return SplashScreen(
         seconds: 5,
-        navigateAfterSeconds: new AfterSplash(),
-        title: new Text(
+        navigateAfterSeconds: AfterSplash(),
+        title: Text(
           'Welcome In SplashScreen',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
-        image: Image.network('https://i.imgur.com/TyCSG9A.png'),
         backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
+        styleTextUnderTheLoader: TextStyle(),
         photoSize: 100.0,
+        image: Image.network(
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1N_9IbSVmbMMCtLAWB06LA3HPj_KzuOQjU6kkXTqnJtqNDPV5&s'),
         onClick: () => print("Flutter SpashScreen"),
         loaderColor: Colors.red);
   }
@@ -34,14 +36,14 @@ class _MyAppState extends State<MyApp> {
 class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-          title: new Text("Welcome In SplashScreen Package"),
+    return Scaffold(
+      appBar: AppBar(
+          title: Text("Welcome In SplashScreen Package"),
           automaticallyImplyLeading: false),
-      body: new Center(
-        child: new Text(
+      body: Center(
+        child: Text(
           "Done!",
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
         ),
       ),
     );
