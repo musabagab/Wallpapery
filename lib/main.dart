@@ -20,8 +20,8 @@ class _MyAppState extends State<MyApp> {
         seconds: 5,
         navigateAfterSeconds: AfterSplash(),
         title: Text(
-          'Welcome In SplashScreen',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          'Wallpapery',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0),
         ),
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: TextStyle(),
