@@ -18,17 +18,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-        seconds: 3,
+        seconds: 2,
         navigateAfterSeconds: Home(),
         title: Text(
           'Wallpapery',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 40.0,
+              fontSize: 60.0,
               fontFamily: 'Pacifico'),
         ),
         backgroundColor: Colors.white,
-        styleTextUnderTheLoader: TextStyle(),
         photoSize: 100.0,
         loaderColor: Colors.transparent);
   }

@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:wallpapery/widgets/SearchBar.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Welcome In SplashScreen Package"),
-          automaticallyImplyLeading: false),
-      body: Center(
-        child: Text(
-          "Done!",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+        body: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            SearchBar(),
+          ],
         ),
       ),
-    );
+    ));
   }
 }
