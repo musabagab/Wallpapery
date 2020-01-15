@@ -8,6 +8,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var images = [
+    'assets/images/1.jpg',
+    'assets/images/2.jpg',
+    'assets/images/3.jpg',
+    'assets/images/4.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,19 +30,19 @@ class _HomeState extends State<Home> {
             CarouselSlider(
               height: 400.0,
               enlargeCenterPage: true,
-              viewportFraction: .7,
-              items: [1, 2, 3, 4, 5].map((i) {
+              viewportFraction: .75,
+              items: [0, 1, 2, 3].map((i) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(40)),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            images[i],
+                            fit: BoxFit.cover,
+                          ),
                         ));
                   },
                 );
