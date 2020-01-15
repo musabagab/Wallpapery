@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
                             color: Colors.amber,
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(40)),
                         child: Text(
                           'text $i',
                           style: TextStyle(fontSize: 16.0),
