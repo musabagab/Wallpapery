@@ -5,13 +5,15 @@ class DetailsView extends StatelessWidget {
   DetailsView(this.imageUrl);
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: imageUrl,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
+    return SafeArea(
+      child: Hero(
+        tag: imageUrl,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
