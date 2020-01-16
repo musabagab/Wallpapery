@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _getBodyUi(ViewState state, images) {
+  Widget _getBodyUi(ViewState state, List<String> images) {
     switch (state) {
       case ViewState.Busy:
         return Center(child: CircularProgressIndicator());
@@ -38,23 +38,32 @@ class HomeView extends StatelessWidget {
           height: 430.0,
           enlargeCenterPage: true,
           viewportFraction: .75,
-          items: [0, 1, 2, 3].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Image.network(
-                        images[i],
-                        fit: BoxFit.cover,
-                      ),
-                    ));
-              },
-            );
-          }).toList(),
+          items: images
+              .asMap()
+              .entries
+              .map((MapEntry map) => _buildImagesList(map.value))
+              .toList(),
         );
     }
+  }
+
+  Widget _buildImagesList(String imageUrl) {
+    return GestureDetector(
+      onTap: () {},
+      child: Builder(
+        builder: (BuildContext context) {
+          return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ));
+        },
+      ),
+    );
   }
 }

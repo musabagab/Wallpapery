@@ -7,8 +7,7 @@ import '../scoped_models/base_model.dart';
 
 class HomeModel extends BaseModel {
   ApiService apiService = locator<ApiService>();
-
-  var images;
+  List<String> images;
 
   Future<bool> getData() async {
     print('Getting Data');
