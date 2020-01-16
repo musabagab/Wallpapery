@@ -52,11 +52,8 @@ class HomeView extends StatelessWidget {
   Widget _buildImagesList(String imageUrl, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Go to Images');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailsView(imageUrl)),
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DetailsView(imageUrl)));
       },
       child: Builder(
         builder: (BuildContext context) {
