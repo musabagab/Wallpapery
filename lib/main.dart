@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:wallpapery/screens/HomeScreen.dart';
+import 'package:wallpapery/service_locator.dart';
+import 'package:wallpapery/ui/home_view.dart';
 
 void main() {
+  setupLocator();
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MyApp(),
@@ -19,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return SplashScreen(
         seconds: 2,
-        navigateAfterSeconds: Home(),
+        navigateAfterSeconds: HomeView(),
         title: Text(
           'Wallpapery',
           style: TextStyle(

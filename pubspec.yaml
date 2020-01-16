@@ -22,6 +22,9 @@ dependencies:
   splashscreen: ^1.2.0
   cupertino_icons: ^0.1.2
   carousel_slider: ^1.4.1
+  http: ^0.12.0+4
+  scoped_model: ^1.0.1
+  get_it: ^1.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
