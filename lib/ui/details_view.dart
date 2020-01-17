@@ -39,7 +39,7 @@ class DetailsView extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
-                    size: 25,
+                    size: 20,
                   ),
                 ),
               ),
@@ -49,31 +49,35 @@ class DetailsView extends StatelessWidget {
               right: 0,
               left: 0,
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                    color: Colors.white24,
+                    color: Colors.blueGrey.withOpacity(.45),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Icons.file_download,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                    Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                    Icon(
-                      Icons.info_outline,
-                      color: Colors.white,
-                      size: 35,
-                    )
-                  ],
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12.0, right: 12.0, top: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Icon(
+                        Icons.file_download,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 30,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
