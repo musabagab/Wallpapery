@@ -15,15 +15,12 @@ class DetailsView extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              height: double.infinity,
+              height: double.infinity, // full screen
               child: Hero(
                 tag: model.selectedHit.largeImageUrl,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    model.selectedHit.largeImageUrl,
-                    fit: BoxFit.fill,
-                  ),
+                child: Image.network(
+                  model.selectedHit.largeImageUrl,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -36,7 +33,7 @@ class DetailsView extends StatelessWidget {
                     color: Colors.white54),
                 child: GestureDetector(
                   onTap: () {
-                    // navifate back
+                    // navigate back
                     Navigator.of(context).pop();
                   },
                   child: Icon(
@@ -46,7 +43,40 @@ class DetailsView extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(45),
+                        topRight: Radius.circular(45))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Icon(
+                      Icons.file_download,
+                      color: Colors.white,
+                      size: 35,
+                    ),
+                    Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
+                      size: 35,
+                    ),
+                    Icon(
+                      Icons.info_outline,
+                      color: Colors.white,
+                      size: 35,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

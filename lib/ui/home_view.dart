@@ -2,9 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
-import 'package:wallpapery/scoped_models/details_model.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
-import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/widgets/SearchBar.dart';
@@ -36,7 +34,9 @@ class HomeView extends StatelessWidget {
       List<Hit> hitsList) {
     switch (state) {
       case ViewState.Busy:
-        return Center(child: CircularProgressIndicator());
+        return Align(
+            alignment: Alignment.bottomCenter,
+            child: CircularProgressIndicator());
       case ViewState.Retrieved:
       default:
         return CarouselSlider(
