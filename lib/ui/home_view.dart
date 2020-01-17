@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpapery/enums/view_states.dart';
+import 'package:wallpapery/models/PhotosModel.dart';
+import 'package:wallpapery/scoped_models/details_model.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
+import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/widgets/SearchBar.dart';
@@ -10,7 +13,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(
-      onModelReady: (model) => model.getData(),
+      onModelReady: (model) => model.getImagesData(),
       builder: (context, child, model) => Scaffold(
           body: SafeArea(
         child: Padding(
@@ -21,7 +24,7 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              _getBodyUi(model.state, model.images, context),
+              _getBodyUi(model.state, model.images, context, model.hitsList),
             ],
           ),
         ),
@@ -29,8 +32,8 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _getBodyUi(
-      ViewState state, List<String> images, BuildContext context) {
+  Widget _getBodyUi(ViewState state, List<String> images, BuildContext context,
+      List<Hit> hitsList) {
     switch (state) {
       case ViewState.Busy:
         return Center(child: CircularProgressIndicator());
@@ -43,17 +46,24 @@ class HomeView extends StatelessWidget {
           items: images
               .asMap()
               .entries
-              .map((MapEntry map) => _buildImagesList(map.value, context))
+              .map((MapEntry map) =>
+                  _buildImagesList(map.value, context, hitsList))
               .toList(),
         );
     }
   }
 
-  Widget _buildImagesList(String imageUrl, BuildContext context) {
+  Widget _buildImagesList(
+      String imageUrl, BuildContext context, List<Hit> hitsList) {
     return GestureDetector(
       onTap: () {
+        // find the selected hit object
+        Hit selectedHit = hitsList.singleWhere((test) {
+          return test.largeImageUrl == imageUrl;
+        });
+        // navigate to deatils screen
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailsView(imageUrl)));
+            MaterialPageRoute(builder: (context) => DetailsView(selectedHit)));
       },
       child: Builder(
         builder: (BuildContext context) {
