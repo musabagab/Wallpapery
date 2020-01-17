@@ -53,8 +53,8 @@ class DetailsView extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.blueGrey.withOpacity(.45),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50))),
+                        topLeft: Radius.circular(45),
+                        topRight: Radius.circular(45))),
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 12.0, right: 12.0, top: 8.0),
