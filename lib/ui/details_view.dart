@@ -6,6 +6,10 @@ import 'package:wallpapery/ui/base_view.dart';
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
+  final ProgressIndicator progressIndicator = CircularProgressIndicator(
+    backgroundColor: Colors.white,
+  );
+
   DetailsView(this.selectedHit);
 
   @override
@@ -27,7 +31,7 @@ class DetailsView extends StatelessWidget {
             ),
             Center(
               child: model.state == ViewState.Busy
-                  ? CircularProgressIndicator()
+                  ? progressIndicator
                   : Container(),
             ),
             Padding(
