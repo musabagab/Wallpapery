@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:load_toast/load_toast.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/details_model.dart';
+import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:http/http.dart' as http;
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
+  final LoadToast loadToast = locator<LoadToast>();
   DetailsView(this.selectedHit);
 
   @override
@@ -89,6 +91,7 @@ class DetailsView extends StatelessWidget {
                 ),
               ),
             ),
+            loadToast,
           ],
         ),
       ),
@@ -96,22 +99,15 @@ class DetailsView extends StatelessWidget {
   }
 
   Future saveImageToGallery() async {
-    showToast('Downloading image...');
     // download image to gallery
+    loadToast.show(text: 'Downloading ...');
     var res = await http.get(selectedHit.largeImageUrl);
     // save it
-    ImagePickerSaver.saveFile(fileData: res.bodyBytes);
-    showToast('Image Saved to gallery');
-  }
-
-  void showToast(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIos: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0);
+    var path = await ImagePickerSaver.saveFile(fileData: res.bodyBytes);
+    if (path != null) {
+      loadToast.success();
+    } else {
+      loadToast.error();
+    }
   }
 }
