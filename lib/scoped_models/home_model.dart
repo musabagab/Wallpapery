@@ -10,6 +10,28 @@ class HomeModel extends BaseModel {
   ApiService apiService = locator<ApiService>();
   List<String> images = List<String>();
   List<Hit> hitsList;
+  final categories = [
+    'fashion',
+    'nature',
+    'backgrounds',
+    'science',
+    'education',
+    'people',
+    'feelings',
+    'religion',
+    'health',
+    'places',
+    'animals',
+    'industry',
+    'food',
+    'computer',
+    'sports',
+    'transportation',
+    'travel',
+    'buildings',
+    'business',
+    'music'
+  ];
 
   Future<bool> getImagesData() async {
     print('Getting Data');

@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
@@ -42,6 +43,7 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
+              _buildCategoriesList(model.categories),
             ],
           ),
         ),
@@ -99,6 +101,36 @@ class HomeView extends StatelessWidget {
                 ),
               ));
         },
+      ),
+    );
+  }
+
+  _buildCategoriesList(List<String> categories) {
+    return Container(
+      margin: EdgeInsets.only(left: 9),
+      width: double.infinity,
+      height: 110,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: categories
+            .asMap()
+            .entries
+            .map((MapEntry map) => _buildIcons(map.value))
+            .toList(),
+      ),
+    );
+  }
+
+  Widget _buildIcons(String category) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.all(2),
+        width: 110,
+        child: CircleAvatar(
+          backgroundColor: Colors.red,
+          child: Text(category),
+        ),
       ),
     );
   }
