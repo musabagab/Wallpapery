@@ -6,9 +6,6 @@ import 'package:wallpapery/ui/base_view.dart';
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
-  final ProgressIndicator progressIndicator = CircularProgressIndicator(
-    backgroundColor: Colors.white,
-  );
 
   DetailsView(this.selectedHit);
 
@@ -31,7 +28,9 @@ class DetailsView extends StatelessWidget {
             ),
             Center(
               child: model.state == ViewState.Busy
-                  ? progressIndicator
+                  ? CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    )
                   : Container(),
             ),
             Padding(
@@ -86,10 +85,15 @@ class DetailsView extends StatelessWidget {
                         color: Colors.white,
                         size: 30,
                       ),
-                      Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                        size: 30,
+                      GestureDetector(
+                        child: Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        onTap: () {
+                          // Show Image information dialog
+                        },
                       )
                     ],
                   ),

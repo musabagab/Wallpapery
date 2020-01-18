@@ -63,6 +63,9 @@ flutter:
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico.ttf
+    - family: Booster
+      fonts:
+        - asset: assets/fonts/booster.ttf
         
   #         style: italic
   #   - family: Trajan Pro

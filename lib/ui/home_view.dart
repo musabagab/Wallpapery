@@ -22,7 +22,26 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              _getBodyUi(model.state, model.images, context, model.hitsList),
+              Container(
+                  height: 400.0,
+                  child: _getBodyUi(
+                      model.state, model.images, context, model.hitsList)),
+              SizedBox(
+                height: 8,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    'Categories',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Booster'),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -35,8 +54,7 @@ class HomeView extends StatelessWidget {
     switch (state) {
       case ViewState.Busy:
         return Align(
-            alignment: Alignment.bottomCenter,
-            child: CircularProgressIndicator());
+            alignment: Alignment.center, child: CircularProgressIndicator());
       case ViewState.Retrieved:
       default:
         return CarouselSlider(
