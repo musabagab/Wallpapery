@@ -129,7 +129,11 @@ class HomeView extends StatelessWidget {
         width: 110,
         child: CircleAvatar(
           backgroundColor: Colors.red,
-          child: Text(category),
+          child: Text(category,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Booster')),
         ),
       ),
     );
