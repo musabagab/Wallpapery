@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/details_model.dart';
 import 'package:wallpapery/ui/base_view.dart';
+import 'package:image_picker_saver/image_picker_saver.dart';
+import 'package:http/http.dart' as http;
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
@@ -61,10 +64,15 @@ class DetailsView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Icon(
-                        Icons.file_download,
-                        color: Colors.white,
-                        size: 30,
+                      GestureDetector(
+                        onTap: () async {
+                          await saveImageToGallery();
+                        },
+                        child: Icon(
+                          Icons.file_download,
+                          color: Colors.white,
+                          size: 30,
+                        ),
                       ),
                       Icon(
                         Icons.favorite_border,
@@ -85,5 +93,25 @@ class DetailsView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future saveImageToGallery() async {
+    showToast('Downloading image...');
+    // download image to gallery
+    var res = await http.get(selectedHit.largeImageUrl);
+    // save it
+    ImagePickerSaver.saveFile(fileData: res.bodyBytes);
+    showToast('Image Saved to gallery');
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIos: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }
