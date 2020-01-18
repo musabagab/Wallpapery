@@ -81,13 +81,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  load_toast:
-    dependency: "direct main"
-    description:
-      name: load_toast
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   matcher:
     dependency: transitive
     description:

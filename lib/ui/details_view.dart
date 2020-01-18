@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:load_toast/load_toast.dart';
+import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/details_model.dart';
-import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
-import 'package:http/http.dart' as http;
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
-  final LoadToast loadToast = locator<LoadToast>();
   DetailsView(this.selectedHit);
 
   @override
@@ -28,6 +24,11 @@ class DetailsView extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
+            ),
+            Center(
+              child: model.state == ViewState.Busy
+                  ? CircularProgressIndicator()
+                  : Container(),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -68,7 +69,7 @@ class DetailsView extends StatelessWidget {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () async {
-                          await saveImageToGallery();
+                          model.saveImage(selectedHit.largeImageUrl);
                         },
                         child: Icon(
                           Icons.file_download,
@@ -91,23 +92,9 @@ class DetailsView extends StatelessWidget {
                 ),
               ),
             ),
-            loadToast,
           ],
         ),
       ),
     );
-  }
-
-  Future saveImageToGallery() async {
-    // download image to gallery
-    loadToast.show(text: 'Downloading ...');
-    var res = await http.get(selectedHit.largeImageUrl);
-    // save it
-    var path = await ImagePickerSaver.saveFile(fileData: res.bodyBytes);
-    if (path != null) {
-      loadToast.success();
-    } else {
-      loadToast.error();
-    }
   }
 }
