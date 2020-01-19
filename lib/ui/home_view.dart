@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               _buildCategoriesList(model.categories, model.scrollController,
-                  model.allCategories.length),
+                  model.allCategories.length, model.allCategoriesImages),
             ],
           ),
         ),
@@ -61,6 +61,7 @@ class _HomeViewState extends State<HomeView> {
     List<String> categories,
     scrollController,
     int fullLength,
+    allCategoriesImages,
   ) {
     return Container(
       width: double.infinity,
@@ -70,25 +71,44 @@ class _HomeViewState extends State<HomeView> {
         scrollDirection: Axis.horizontal,
         itemCount: categories.length + 1,
         itemBuilder: (BuildContext context, int index) {
-          if (index == fullLength) {
-            // end of the list
-            return Container();
-          }
           if ((index == categories.length)) {
+            if (index == fullLength) {
+              // end of the list
+              return Container();
+            }
             return Center(child: CircularProgressIndicator());
           }
           return GestureDetector(
             onTap: () {},
             child: Container(
               margin: EdgeInsets.all(2),
-              width: 110,
-              child: CircleAvatar(
-                backgroundColor: Colors.red,
-                child: Text(categories[index],
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Booster')),
+              width: 100,
+              child: Container(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(allCategoriesImages[index]),
+                  child: Container(
+                    width: 80,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          const Color(0xCC000000),
+                          const Color(0xCC00000),
+                        ],
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(categories[index],
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Booster')),
+                    ),
+                  ),
+                ),
               ),
             ),
           );
