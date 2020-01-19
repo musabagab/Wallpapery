@@ -48,7 +48,8 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              _buildCategoriesList(model.categories, model.scrollController),
+              _buildCategoriesList(model.categories, model.scrollController,
+                  model.allCategories.length),
             ],
           ),
         ),
@@ -56,15 +57,26 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  _buildCategoriesList(List<String> categories, scrollController) {
+  _buildCategoriesList(
+    List<String> categories,
+    scrollController,
+    int fullLength,
+  ) {
     return Container(
       width: double.infinity,
       height: 100,
       child: ListView.builder(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: categories.length + 1,
         itemBuilder: (BuildContext context, int index) {
+          if (index == fullLength) {
+            // end of the list
+            return Container();
+          }
+          if ((index == categories.length)) {
+            return Center(child: CircularProgressIndicator());
+          }
           return GestureDetector(
             onTap: () {},
             child: Container(
