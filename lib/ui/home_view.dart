@@ -65,8 +65,7 @@ class _HomeViewState extends State<HomeView> {
   ) {
     return Container(
       width: double.infinity,
-      height: 100,
-      margin: EdgeInsets.only(left: 10),
+      margin: EdgeInsets.only(left: 10, top: 10),
       child: ListView.builder(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
