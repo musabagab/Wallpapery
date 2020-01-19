@@ -104,9 +104,9 @@ class _HomeViewState extends State<HomeView> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    const Color(0xCC00000),
-                    const Color(0xCC000000),
-                    const Color(0xCC00000),
+                    const Color(0xCC000000).withOpacity(.0),
+                    const Color(0xCC000000).withOpacity(.4),
+                    const Color(0xCC000000).withOpacity(.0),
                   ],
                 ),
               ),
