@@ -66,6 +66,7 @@ class _HomeViewState extends State<HomeView> {
     return Container(
       width: double.infinity,
       height: 100,
+      margin: EdgeInsets.only(left: 10),
       child: ListView.builder(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
@@ -78,41 +79,47 @@ class _HomeViewState extends State<HomeView> {
             }
             return Center(child: CircularProgressIndicator());
           }
-          return GestureDetector(
-            onTap: () {},
+          return buidlCategoryItem(allCategoriesImages, index, categories);
+        },
+      ),
+    );
+  }
+
+  GestureDetector buidlCategoryItem(
+      allCategoriesImages, int index, List<String> categories) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.all(2),
+        width: 100,
+        child: Container(
+          child: CircleAvatar(
+            backgroundImage: AssetImage(allCategoriesImages[index]),
             child: Container(
-              margin: EdgeInsets.all(2),
-              width: 100,
-              child: Container(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(allCategoriesImages[index]),
-                  child: Container(
-                    width: 80,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          const Color(0xCC000000),
-                          const Color(0xCC00000),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(categories[index],
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Booster')),
-                    ),
-                  ),
+              width: 80,
+              height: 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    const Color(0xCC00000),
+                    const Color(0xCC000000),
+                    const Color(0xCC00000),
+                  ],
                 ),
               ),
+              child: Center(
+                child: Text(categories[index],
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Booster')),
+              ),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
