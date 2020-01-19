@@ -36,7 +36,7 @@ class HomeModel extends BaseModel {
   ScrollController scrollController = ScrollController();
 
   List<String> categories = List<String>(); // currently displayed
-  static int currentStartIndex = 0;
+  int currentStartIndex;
 
   getMoreCategories(currentIndex) {
     return allCategories.sublist(currentIndex, currentIndex + 4);

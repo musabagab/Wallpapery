@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              _buildCategoriesList(model.categories, model),
+              _buildCategoriesList(model.categories, model.scrollController),
             ],
           ),
         ),
@@ -56,12 +56,12 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  _buildCategoriesList(List<String> categories, model) {
+  _buildCategoriesList(List<String> categories, scrollController) {
     return Container(
       width: double.infinity,
       height: 100,
       child: ListView.builder(
-        controller: model.scrollController,
+        controller: scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
