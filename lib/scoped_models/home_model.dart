@@ -36,14 +36,9 @@ class HomeModel extends BaseModel {
   ScrollController scrollController = ScrollController();
 
   List<String> categories = List<String>(); // currently displayed
-  int currentStartIndex;
-
-  getMoreCategories(currentIndex) {
-    return allCategories.sublist(currentIndex, currentIndex + 4);
-  }
+  int currentStartIndex = 0;
 
   Future<bool> getImagesData() async {
-    currentStartIndex = 0;
     categories =
         allCategories.sublist(currentStartIndex, 4); // get the first four
 
