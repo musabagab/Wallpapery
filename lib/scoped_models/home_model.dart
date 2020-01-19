@@ -33,6 +33,10 @@ class HomeModel extends BaseModel {
     'music'
   ];
 
+  getCategoires() {
+    return categories;
+  }
+
   Future<bool> getImagesData() async {
     print('Getting Data');
     setState(ViewState.Busy);

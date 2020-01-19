@@ -4,11 +4,37 @@ import 'package:flutter/rendering.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
+import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/widgets/SearchBar.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  ScrollController _scrollController = ScrollController();
+  final categories = locator<HomeModel>().getCategoires();
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        // end of the list
+        _getMoreData();
+      }
+    });
+
+    super.initState();
+  }
+
+  void _getMoreData() {
+    print("Get more Data");
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(
@@ -43,11 +69,42 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              _buildCategoriesList(model.categories),
+              _buildCategoriesList(categories),
             ],
           ),
         ),
       )),
+    );
+  }
+
+  _buildCategoriesList(List<String> categories) {
+    return Container(
+      margin: EdgeInsets.only(left: 9),
+      width: double.infinity,
+      height: 110,
+      child: ListView.builder(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemExtent: 100,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {},
+            child: Container(
+              margin: EdgeInsets.all(2),
+              width: 110,
+              child: CircleAvatar(
+                backgroundColor: Colors.red,
+                child: Text(categories[index],
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Booster')),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -101,40 +158,6 @@ class HomeView extends StatelessWidget {
                 ),
               ));
         },
-      ),
-    );
-  }
-
-  _buildCategoriesList(List<String> categories) {
-    return Container(
-      margin: EdgeInsets.only(left: 9),
-      width: double.infinity,
-      height: 110,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: categories
-            .asMap()
-            .entries
-            .map((MapEntry map) => _buildIcons(map.value))
-            .toList(),
-      ),
-    );
-  }
-
-  Widget _buildIcons(String category) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        margin: EdgeInsets.all(2),
-        width: 110,
-        child: CircleAvatar(
-          backgroundColor: Colors.red,
-          child: Text(category,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Booster')),
-        ),
       ),
     );
   }
