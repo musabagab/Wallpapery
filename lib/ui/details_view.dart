@@ -72,7 +72,7 @@ class DetailsView extends StatelessWidget {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () async {
-                          model.saveImage(selectedHit.largeImageUrl);
+                          model.saveImage(selectedHit.largeImageUrl, context);
                         },
                         child: Icon(
                           Icons.file_download,

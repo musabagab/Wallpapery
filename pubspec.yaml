@@ -27,6 +27,7 @@ dependencies:
   get_it: ^1.0.3  
   image_picker_saver: ^0.3.0
   progress_dialog: ^1.2.0
+  toast: ^0.1.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
