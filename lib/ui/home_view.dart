@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
-import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/widgets/SearchBar.dart';
@@ -15,26 +14,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  ScrollController _scrollController = ScrollController();
-  final categories = locator<HomeModel>().getCategoires();
-
-  @override
-  void initState() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        // end of the list
-        _getMoreData();
-      }
-    });
-
-    super.initState();
-  }
-
-  void _getMoreData() {
-    print("Get more Data");
-  }
-
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(
@@ -69,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              _buildCategoriesList(categories),
+              _buildCategoriesList(model.categories, model),
             ],
           ),
         ),
@@ -77,16 +56,14 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  _buildCategoriesList(List<String> categories) {
+  _buildCategoriesList(List<String> categories, model) {
     return Container(
-      margin: EdgeInsets.only(left: 9),
       width: double.infinity,
-      height: 110,
+      height: 100,
       child: ListView.builder(
-        controller: _scrollController,
+        controller: model.scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
-        itemExtent: 100,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {},

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/base_model.dart';
 import 'package:wallpapery/service_locator.dart';
@@ -10,7 +11,7 @@ class HomeModel extends BaseModel {
   ApiService apiService = locator<ApiService>();
   List<String> images = List<String>();
   List<Hit> hitsList;
-  final categories = [
+  final allCategories = [
     'fashion',
     'nature',
     'backgrounds',
@@ -32,13 +33,36 @@ class HomeModel extends BaseModel {
     'business',
     'music'
   ];
+  ScrollController scrollController = ScrollController();
 
-  getCategoires() {
-    return categories;
+  List<String> categories = List<String>(); // currently displayed
+  static int currentStartIndex = 0;
+
+  getMoreCategories(currentIndex) {
+    return allCategories.sublist(currentIndex, currentIndex + 4);
   }
 
   Future<bool> getImagesData() async {
-    print('Getting Data');
+    currentStartIndex = 0;
+    categories =
+        allCategories.sublist(currentStartIndex, 4); // get the first four
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        // get more data onscroll
+        currentStartIndex += 4;
+        if (currentStartIndex >= allCategories.length) {
+          return;
+        }
+        for (int i = currentStartIndex; i < currentStartIndex + 4; i++) {
+          categories.add(allCategories[i]);
+        }
+        notifyListeners();
+      }
+    });
+
+    print('Getting Images Data');
     setState(ViewState.Busy);
     hitsList = await apiService.getData();
     for (var item in hitsList) {
