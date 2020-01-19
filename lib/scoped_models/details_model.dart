@@ -22,8 +22,8 @@ class DetailsModel extends BaseModel {
     // save it
     await ImagePickerSaver.saveFile(fileData: res.bodyBytes);
     Toast.show("Image saved to gallery", context,
-        duration: Toast.LENGTH_SHORT,
-        gravity: Toast.BOTTOM,
+        duration: Toast.LENGTH_LONG,
+        gravity: Toast.CENTER,
         backgroundColor: Colors.blueAccent);
     setState(ViewState.Retrieved);
   }
