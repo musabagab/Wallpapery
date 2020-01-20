@@ -9,8 +9,8 @@ GetIt locator = GetIt();
 void setupLocator() {
   //register services
   locator.registerLazySingleton<ApiService>(() => ApiService());
-  //register models
   locator.registerFactory<HomeModel>(() => HomeModel());
+  //register models
   locator.registerFactory<DetailsModel>(() => DetailsModel());
   locator.registerFactory<TrendingModel>(() => TrendingModel());
 }

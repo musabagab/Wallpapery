@@ -5,6 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
+import 'package:wallpapery/service_locator.dart';
+import 'package:wallpapery/services/api_service.dart';
+
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/ui/trending_view.dart';
@@ -73,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           _buildCategoriesList(model.categories, model.scrollController,
-              model.allCategories.length, model.allCategoriesImages),
+              model.allCategories.length, model.allCategoriesImages, model),
         ],
       ),
     );
@@ -140,6 +143,7 @@ class _HomeViewState extends State<HomeView> {
     scrollController,
     int fullLength,
     allCategoriesImages,
+    HomeModel model,
   ) {
     return Container(
       width: double.infinity,
@@ -157,16 +161,20 @@ class _HomeViewState extends State<HomeView> {
             }
             return Center(child: CircularProgressIndicator());
           }
-          return buidlCategoryItem(allCategoriesImages, index, categories);
+          return buidlCategoryItem(
+              allCategoriesImages, index, categories, model);
         },
       ),
     );
   }
 
-  GestureDetector buidlCategoryItem(
-      allCategoriesImages, int index, List<String> categories) {
-    return GestureDetector(
-      onTap: () {},
+  InkWell buidlCategoryItem(allCategoriesImages, int index,
+      List<String> categories, HomeModel model) {
+    return InkWell(
+      onTap: () {
+        locator<ApiService>().setCategoriesUrl(categories[index]);
+        model.changeTab(1);
+      },
       child: Container(
         margin: EdgeInsets.all(2),
         width: 100,
