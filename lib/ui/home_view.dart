@@ -76,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           _buildCategoriesList(model.categories, model.scrollController,
-              model.allCategories.length, model.allCategoriesImages, model),
+              model.allCategories.length, model.allCategoriesImages),
         ],
       ),
     );
@@ -143,7 +143,6 @@ class _HomeViewState extends State<HomeView> {
     scrollController,
     int fullLength,
     allCategoriesImages,
-    HomeModel model,
   ) {
     return Container(
       width: double.infinity,
@@ -161,19 +160,18 @@ class _HomeViewState extends State<HomeView> {
             }
             return Center(child: CircularProgressIndicator());
           }
-          return buidlCategoryItem(
-              allCategoriesImages, index, categories, model);
+          return buidlCategoryItem(allCategoriesImages, index, categories);
         },
       ),
     );
   }
 
-  InkWell buidlCategoryItem(allCategoriesImages, int index,
-      List<String> categories, HomeModel model) {
+  InkWell buidlCategoryItem(
+      allCategoriesImages, int index, List<String> categories) {
     return InkWell(
       onTap: () {
         locator<ApiService>().setCategoriesUrl(categories[index]);
-        model.changeTab(1);
+        locator<HomeModel>().changeTab(1);
       },
       child: Container(
         margin: EdgeInsets.all(2),
