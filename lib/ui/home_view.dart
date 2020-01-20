@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
@@ -32,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
             items: [
               BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.explore,
+                    FontAwesomeIcons.rocket,
                     size: 32,
                   ),
                   title: model.getCurrentTab() == 0
@@ -44,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
                       : Text('')),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.whatshot,
+                  FontAwesomeIcons.fire,
                   size: 32,
                 ),
                 title: model.getCurrentTab() == 1
@@ -59,12 +60,12 @@ class _HomeViewState extends State<HomeView> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.access_time,
+                  Icons.favorite_border,
                   size: 30,
                 ),
                 title: model.getCurrentTab() == 2
                     ? Text(
-                        'Highlights',
+                        'Favourites',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       )
