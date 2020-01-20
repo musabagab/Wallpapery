@@ -19,41 +19,94 @@ class _HomeViewState extends State<HomeView> {
     return BaseView<HomeModel>(
       onModelReady: (model) => model.getImagesData(),
       builder: (context, child, model) => Scaffold(
-          body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 16, bottom: 16),
-          child: Column(
-            children: <Widget>[
-              SearchBar(),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                  height: 400.0,
-                  child: _getBodyUi(
-                      model.state, model.images, context, model.hitsList)),
-              SizedBox(
-                height: 8,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    'Categories',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Booster'),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) {
+              model.changeTab(index);
+              print(index);
+            },
+
+            selectedItemColor: Colors.black87,
+            currentIndex: model
+                .getCurrentTab(), // this will be set when a new tab is tapped
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.explore,
+                    size: 32,
                   ),
+                  title: model.getCurrentTab() == 0
+                      ? Text(
+                          'Explore',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        )
+                      : Text('')),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.whatshot,
+                  size: 32,
                 ),
+                title: model.getCurrentTab() == 1
+                    ? Text(
+                        'Trending',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : Text(''),
               ),
-              _buildCategoriesList(model.categories, model.scrollController,
-                  model.allCategories.length, model.allCategoriesImages),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.access_time,
+                  size: 30,
+                ),
+                title: model.getCurrentTab() == 2
+                    ? Text(
+                        'Highlights',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      )
+                    : Text(''),
+              )
             ],
           ),
-        ),
-      )),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              child: Column(
+                children: <Widget>[
+                  SearchBar(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                      height: 350.0,
+                      child: _getBodyUi(
+                          model.state, model.images, context, model.hitsList)),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Text(
+                        'Categories',
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Booster'),
+                      ),
+                    ),
+                  ),
+                  _buildCategoriesList(model.categories, model.scrollController,
+                      model.allCategories.length, model.allCategoriesImages),
+                ],
+              ),
+            ),
+          )),
     );
   }
 
@@ -65,6 +118,7 @@ class _HomeViewState extends State<HomeView> {
   ) {
     return Container(
       width: double.infinity,
+      height: 100,
       margin: EdgeInsets.only(left: 10, top: 8),
       child: ListView.builder(
         controller: scrollController,
@@ -138,9 +192,9 @@ class _HomeViewState extends State<HomeView> {
       case ViewState.Retrieved:
       default:
         return CarouselSlider(
-          height: 420.0,
+          height: 350.0,
           enlargeCenterPage: true,
-          viewportFraction: .75,
+          viewportFraction: .6,
           items: images
               .asMap()
               .entries
@@ -166,7 +220,7 @@ class _HomeViewState extends State<HomeView> {
       child: Builder(
         builder: (BuildContext context) {
           return Container(
-              width: MediaQuery.of(context).size.width,
+              width: 250,
               margin: EdgeInsets.symmetric(horizontal: 5.0),
               child: Hero(
                 tag: imageUrl,
