@@ -6,9 +6,19 @@ export '../enums/view_states.dart'; // exposed to all models// exposed to all mo
 class BaseModel extends Model {
   ViewState _state;
   ViewState get state => _state;
+  int currentTap = 0;
 
   void setState(ViewState state) {
     _state = state;
     notifyListeners();
+  }
+
+  changeTab(int i) {
+    currentTap = i;
+    notifyListeners();
+  }
+
+  getCurrentTab() {
+    return currentTap;
   }
 }

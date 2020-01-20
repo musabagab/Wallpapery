@@ -52,7 +52,6 @@ class HomeModel extends BaseModel {
 
   List<String> categories = List<String>(); // currently displayed
   int currentStartIndex = 0;
-  int currentTap = 0;
 
   Future<bool> getImagesData() async {
     categories =
@@ -83,14 +82,5 @@ class HomeModel extends BaseModel {
     }
     setState(ViewState.Retrieved);
     return true;
-  }
-
-  changeTab(int i) {
-    currentTap = i;
-    notifyListeners();
-  }
-
-  getCurrentTab() {
-    return currentTap;
   }
 }

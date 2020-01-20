@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
               BottomNavigationBarItem(
                   icon: Icon(
                     FontAwesomeIcons.rocket,
-                    size: 32,
+                    size: 30,
                   ),
                   title: model.getCurrentTab() == 0
                       ? Text(
@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
               BottomNavigationBarItem(
                 icon: Icon(
                   FontAwesomeIcons.fire,
-                  size: 32,
+                  size: 30,
                 ),
                 title: model.getCurrentTab() == 1
                     ? Text(
@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.favorite_border,
+                  Icons.favorite,
                   size: 30,
                 ),
                 title: model.getCurrentTab() == 2
@@ -73,41 +73,46 @@ class _HomeViewState extends State<HomeView> {
               )
             ],
           ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
-              child: Column(
-                children: <Widget>[
-                  SearchBar(),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                      height: 350.0,
-                      child: _getBodyUi(
-                          model.state, model.images, context, model.hitsList)),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'Categories',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Booster'),
-                      ),
+          body: model.getCurrentTab() == 0
+              ? SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 16),
+                    child: Column(
+                      children: <Widget>[
+                        SearchBar(),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                            height: 350.0,
+                            child: _getBodyUi(model.state, model.images,
+                                context, model.hitsList)),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(
+                              'Categories',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Booster'),
+                            ),
+                          ),
+                        ),
+                        _buildCategoriesList(
+                            model.categories,
+                            model.scrollController,
+                            model.allCategories.length,
+                            model.allCategoriesImages),
+                      ],
                     ),
                   ),
-                  _buildCategoriesList(model.categories, model.scrollController,
-                      model.allCategories.length, model.allCategoriesImages),
-                ],
-              ),
-            ),
-          )),
+                )
+              : Container()),
     );
   }
 
