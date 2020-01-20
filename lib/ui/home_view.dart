@@ -7,6 +7,7 @@ import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
+import 'package:wallpapery/ui/trending_view.dart';
 import 'package:wallpapery/widgets/SearchBar.dart';
 
 class HomeView extends StatefulWidget {
@@ -20,99 +21,117 @@ class _HomeViewState extends State<HomeView> {
     return BaseView<HomeModel>(
       onModelReady: (model) => model.getImagesData(),
       builder: (context, child, model) => Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) {
-              model.changeTab(index);
-              print(index);
-            },
+        bottomNavigationBar: _buildBottomNavigationBar(model),
+        body:
+            SafeArea(child: showTabView(model.getCurrentTab(), context, model)),
+      ),
+    );
+  }
 
-            selectedItemColor: Colors.black87,
-            currentIndex: model
-                .getCurrentTab(), // this will be set when a new tab is tapped
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.rocket,
-                    size: 30,
-                  ),
-                  title: model.getCurrentTab() == 0
-                      ? Text(
-                          'Explore',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        )
-                      : Text('')),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  FontAwesomeIcons.fire,
-                  size: 30,
-                ),
-                title: model.getCurrentTab() == 1
-                    ? Text(
-                        'Trending',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : Text(''),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.favorite,
-                  size: 30,
-                ),
-                title: model.getCurrentTab() == 2
-                    ? Text(
-                        'Favourites',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      )
-                    : Text(''),
-              )
-            ],
+  showTabView(currentTabIndex, context, model) {
+    if (currentTabIndex == 0) {
+      return _buildHomeBody(model, context); // HomeView
+    } else if (currentTabIndex == 1) {
+      return Container(
+        child: TrendingView(), // TrendingView
+      );
+    } else {
+      return Container(
+        child: Text('Favourites'), //FavView
+      );
+    }
+  }
+
+  Padding _buildHomeBody(HomeModel model, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 16),
+      child: Column(
+        children: <Widget>[
+          SearchBar(),
+          SizedBox(
+            height: 16,
           ),
-          body: model.getCurrentTab() == 0
-              ? SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16, bottom: 16),
-                    child: Column(
-                      children: <Widget>[
-                        SearchBar(),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                            height: 350.0,
-                            child: _getBodyUi(model.state, model.images,
-                                context, model.hitsList)),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              'Categories',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Booster'),
-                            ),
-                          ),
-                        ),
-                        _buildCategoriesList(
-                            model.categories,
-                            model.scrollController,
-                            model.allCategories.length,
-                            model.allCategoriesImages),
-                      ],
-                    ),
+          Container(
+            height: 350.0,
+            child: _getCarouselBody(
+                model.state, model.images, context, model.hitsList),
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                'Categories',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Booster'),
+              ),
+            ),
+          ),
+          _buildCategoriesList(model.categories, model.scrollController,
+              model.allCategories.length, model.allCategoriesImages),
+        ],
+      ),
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar(HomeModel model) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+        model.changeTab(index);
+        print(index);
+      },
+
+      selectedItemColor: Colors.black87,
+      currentIndex:
+          model.getCurrentTab(), // this will be set when a new tab is tapped
+      items: [
+        BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.rocket,
+              size: 30,
+            ),
+            title: model.getCurrentTab() == 0
+                ? Text(
+                    'Explore',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  )
+                : Text('')),
+        BottomNavigationBarItem(
+          icon: Icon(
+            FontAwesomeIcons.fire,
+            size: 30,
+          ),
+          title: model.getCurrentTab() == 1
+              ? Text(
+                  'Trending',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 )
-              : Container()),
+              : Text(''),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.favorite,
+            size: 30,
+          ),
+          title: model.getCurrentTab() == 2
+              ? Text(
+                  'Favourites',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                )
+              : Text(''),
+        )
+      ],
     );
   }
 
@@ -189,8 +208,8 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _getBodyUi(ViewState state, List<String> images, BuildContext context,
-      List<Hit> hitsList) {
+  Widget _getCarouselBody(ViewState state, List<String> images,
+      BuildContext context, List<Hit> hitsList) {
     switch (state) {
       case ViewState.Busy:
         return Align(
