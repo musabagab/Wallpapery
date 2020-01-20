@@ -26,7 +26,7 @@ dependencies:
   scoped_model: ^1.0.1
   get_it: ^1.0.3  
   image_picker_saver: ^0.3.0
-  
+  font_awesome_flutter: ^8.5.0
   toast: ^0.1.5
 dev_dependencies:
   flutter_test:
