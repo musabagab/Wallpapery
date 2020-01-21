@@ -82,72 +82,77 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  BottomNavigationBar _buildBottomNavigationBar(HomeModel model) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      onTap: (index) {
-        model.changeTab(index);
-        print(index);
-      },
+  Widget _buildBottomNavigationBar(HomeModel model) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(5)),
+          boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 8)]),
+      child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          model.changeTab(index);
+          print(index);
+        },
 
-      selectedItemColor: Colors.black87,
-      currentIndex:
-          model.getCurrentTab(), // this will be set when a new tab is tapped
-      items: [
-        BottomNavigationBarItem(
+        selectedItemColor: Colors.black87,
+        currentIndex:
+            model.getCurrentTab(), // this will be set when a new tab is tapped
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.rocket,
+                size: 30,
+              ),
+              title: model.getCurrentTab() == 0
+                  ? Column(
+                      children: <Widget>[
+                        Text(
+                          'Explore',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                        ),
+                        Text('●')
+                      ],
+                    )
+                  : Text('')),
+          BottomNavigationBarItem(
             icon: Icon(
-              FontAwesomeIcons.rocket,
+              FontAwesomeIcons.fire,
               size: 30,
             ),
-            title: model.getCurrentTab() == 0
+            title: model.getCurrentTab() == 1
                 ? Column(
                     children: <Widget>[
                       Text(
-                        'Explore',
+                        'Trending',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       Text('●')
                     ],
                   )
-                : Text('')),
-        BottomNavigationBarItem(
-          icon: Icon(
-            FontAwesomeIcons.fire,
-            size: 30,
+                : Text(''),
           ),
-          title: model.getCurrentTab() == 1
-              ? Column(
-                  children: <Widget>[
-                    Text(
-                      'Trending',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    Text('●')
-                  ],
-                )
-              : Text(''),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.favorite,
-            size: 30,
-          ),
-          title: model.getCurrentTab() == 2
-              ? Column(
-                  children: <Widget>[
-                    Text(
-                      'Favourites',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    Text('●')
-                  ],
-                )
-              : Text(''),
-        )
-      ],
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
+              size: 30,
+            ),
+            title: model.getCurrentTab() == 2
+                ? Column(
+                    children: <Widget>[
+                      Text(
+                        'Favourites',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      Text('●')
+                    ],
+                  )
+                : Text(''),
+          )
+        ],
+      ),
     );
   }
 

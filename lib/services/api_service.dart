@@ -3,7 +3,7 @@ import 'package:wallpapery/models/PhotosModel.dart';
 
 class ApiService {
   static int pageCount = 6; //default
-  String category = 'art'; //deafault
+  String category = 'travel'; //deafault
   static final String API_KEY = '14921997-2f305f4f3ccc588248ffad6e2';
   final String baseurl =
       "https://pixabay.com/api/?key=$API_KEY&per_page=$pageCount";
