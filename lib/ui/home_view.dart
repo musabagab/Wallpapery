@@ -85,8 +85,10 @@ class _HomeViewState extends State<HomeView> {
   Widget _buildBottomNavigationBar(HomeModel model) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(5)),
-          boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 8)]),
+        boxShadow: [
+          BoxShadow(color: Colors.black54, blurRadius: 8),
+        ],
+      ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
