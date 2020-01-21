@@ -69,7 +69,7 @@ class _HomeViewState extends State<HomeView> {
               child: Text(
                 'Categories',
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Booster'),
               ),
@@ -100,10 +100,15 @@ class _HomeViewState extends State<HomeView> {
               size: 30,
             ),
             title: model.getCurrentTab() == 0
-                ? Text(
-                    'Explore',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                ? Column(
+                    children: <Widget>[
+                      Text(
+                        'Explore',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      Text('●')
+                    ],
                   )
                 : Text('')),
         BottomNavigationBarItem(
@@ -112,12 +117,15 @@ class _HomeViewState extends State<HomeView> {
             size: 30,
           ),
           title: model.getCurrentTab() == 1
-              ? Text(
-                  'Trending',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ? Column(
+                  children: <Widget>[
+                    Text(
+                      'Trending',
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    Text('●')
+                  ],
                 )
               : Text(''),
         ),
@@ -127,10 +135,15 @@ class _HomeViewState extends State<HomeView> {
             size: 30,
           ),
           title: model.getCurrentTab() == 2
-              ? Text(
-                  'Favourites',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+              ? Column(
+                  children: <Widget>[
+                    Text(
+                      'Favourites',
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    Text('●')
+                  ],
                 )
               : Text(''),
         )
@@ -146,7 +159,7 @@ class _HomeViewState extends State<HomeView> {
   ) {
     return Container(
       width: double.infinity,
-      height: 100,
+      height: 85,
       margin: EdgeInsets.only(left: 10, top: 8),
       child: ListView.builder(
         controller: scrollController,
@@ -174,8 +187,8 @@ class _HomeViewState extends State<HomeView> {
         locator<HomeModel>().changeTab(1);
       },
       child: Container(
-        margin: EdgeInsets.all(2),
-        width: 100,
+        margin: EdgeInsets.all(4),
+        width: 85,
         child: Container(
           child: CircleAvatar(
             backgroundImage: AssetImage(allCategoriesImages[index]),
