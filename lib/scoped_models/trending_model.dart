@@ -10,7 +10,7 @@ class TrendingModel extends BaseModel {
   List<Hit> hitsList;
 
   Future<bool> getCategoryData() async {
-    print('Getting Images Data');
+    print('Getting Gategory ${apiService.category} Data');
     setState(ViewState.Busy);
     hitsList = await apiService.getCategoryData(); // for specfic category
     for (var item in hitsList) {

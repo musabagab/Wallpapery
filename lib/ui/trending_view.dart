@@ -15,7 +15,13 @@ class TrendingView extends StatelessWidget {
       builder: (context, child, model) => Scaffold(
         body: Column(
           children: <Widget>[
+            SizedBox(
+              height: 16,
+            ),
             SearchBar(),
+            SizedBox(
+              height: 16,
+            ),
             model.state == ViewState.Busy
                 ? Center(child: CircularProgressIndicator())
                 : buildImageGrid(model.images)
@@ -27,15 +33,23 @@ class TrendingView extends StatelessWidget {
 }
 
 buildImageGrid(List<String> images) {
+  print(images.toString());
   return Expanded(
-    child: Container(
-        color: Colors.red,
-        width: double.infinity,
-        child: GridView.count(
+      child: GridView.count(
           crossAxisCount: 2,
-          children: <Widget>[
-            Text('Image1'),
-          ],
-        )),
-  );
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          childAspectRatio: .6,
+          children: images.map((value) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  value,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          }).toList()));
 }
