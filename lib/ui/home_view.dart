@@ -187,8 +187,8 @@ class _HomeViewState extends State<HomeView> {
         locator<HomeModel>().changeTab(1);
       },
       child: Container(
-        margin: EdgeInsets.all(4),
-        width: 85,
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        width: 80,
         child: Container(
           child: CircleAvatar(
             backgroundImage: AssetImage(allCategoriesImages[index]),
