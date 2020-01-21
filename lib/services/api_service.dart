@@ -16,7 +16,15 @@ class ApiService {
     return hits;
   }
 
-  setCategoriesUrl(String newcategory) {
+  Future<List<Hit>> getCategoryData() async {
+    var res = await http.get(baseurl + '&category=$category');
+    final photosModel = photosModelFromJson(res.body);
+    final List<Hit> hits = photosModel.hits;
+
+    return hits;
+  }
+
+  setCategory(String newcategory) {
     category = newcategory;
   }
 

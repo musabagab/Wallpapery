@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/scoped_models/trending_model.dart';
 import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/services/api_service.dart';
@@ -10,16 +11,31 @@ class TrendingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<TrendingModel>(
+      onModelReady: (model) => model.getCategoryData(),
       builder: (context, child, model) => Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(top: 16, bottom: 16),
-          child: Column(
-            children: <Widget>[
-              SearchBar(),
-            ],
-          ),
+        body: Column(
+          children: <Widget>[
+            SearchBar(),
+            model.state == ViewState.Busy
+                ? Center(child: CircularProgressIndicator())
+                : buildImageGrid(model.images)
+          ],
         ),
       ),
     );
   }
+}
+
+buildImageGrid(List<String> images) {
+  return Expanded(
+    child: Container(
+        color: Colors.red,
+        width: double.infinity,
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: <Widget>[
+            Text('Image1'),
+          ],
+        )),
+  );
 }

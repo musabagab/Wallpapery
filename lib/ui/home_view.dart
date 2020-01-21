@@ -183,7 +183,7 @@ class _HomeViewState extends State<HomeView> {
       allCategoriesImages, int index, List<String> categories) {
     return InkWell(
       onTap: () {
-        locator<ApiService>().setCategoriesUrl(categories[index]);
+        locator<ApiService>().setCategory(categories[index]);
         locator<HomeModel>().changeTab(1);
       },
       child: Container(
