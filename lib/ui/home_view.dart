@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
       );
     } else {
       return Container(
-        child: Text('Favourites'), //FavView
+        child: Center(child: Text('Favourites')), //FavView
       );
     }
   }
