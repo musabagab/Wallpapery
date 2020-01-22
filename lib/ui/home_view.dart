@@ -7,11 +7,9 @@ import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/home_model.dart';
 import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/services/api_service.dart';
-
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
 import 'package:wallpapery/ui/trending_view.dart';
-import 'package:wallpapery/widgets/SearchBar.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -50,9 +48,15 @@ class _HomeViewState extends State<HomeView> {
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       child: Column(
         children: <Widget>[
-          SearchBar(),
+          Text(
+            'Wallpapery',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontFamily: 'Pacifico'),
+          ),
           SizedBox(
-            height: 16,
+            height: 8,
           ),
           Container(
             height: 350.0,
@@ -265,8 +269,12 @@ class _HomeViewState extends State<HomeView> {
           return test.largeImageUrl == imageUrl;
         });
         // navigate to deatils screen
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DetailsView(selectedHit)));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsView(selectedHit),
+          ),
+        );
       },
       child: Builder(
         builder: (BuildContext context) {

@@ -24,7 +24,12 @@ class TrendingView extends StatelessWidget {
               height: 16,
             ),
             model.state == ViewState.Busy
-                ? Center(child: CircularProgressIndicator())
+                ? Container(
+                    height: 400,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
                 : buildImageGrid(model.images, model.hitsList, context)
           ],
         ),
