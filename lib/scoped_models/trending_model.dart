@@ -9,10 +9,11 @@ class TrendingModel extends BaseModel {
   List<String> images = List<String>();
   List<Hit> hitsList;
 
-  Future<bool> getCategoryData() async {
+  Future<bool> getCategoryData({String searchQuery}) async {
     print('Getting Gategory ${apiService.category} Data');
     setState(ViewState.Busy);
-    hitsList = await apiService.getCategoryData(); // for specfic category
+    hitsList = await apiService.getCategoryData(
+        search: searchQuery); // for specfic category
     for (var item in hitsList) {
       if (item.largeImageUrl != null) {
         images.add(item.largeImageUrl);
