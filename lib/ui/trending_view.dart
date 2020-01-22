@@ -6,7 +6,6 @@ import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/services/api_service.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
-import 'package:wallpapery/widgets/SearchBar.dart';
 
 class TrendingView extends StatelessWidget {
   final String category = locator<ApiService>().category;
@@ -20,7 +19,7 @@ class TrendingView extends StatelessWidget {
             SizedBox(
               height: 16,
             ),
-            SearchBar(),
+            buildSearchBar(category, model),
             SizedBox(
               height: 16,
             ),
@@ -29,6 +28,70 @@ class TrendingView extends StatelessWidget {
                 : buildImageGrid(model.images, model.hitsList, context)
           ],
         ),
+      ),
+    );
+  }
+
+  buildSearchBar(String category, TrendingModel model) {
+    String searchText = "";
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(
+            Icons.sort,
+            color: Colors.black,
+            size: 45,
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Expanded(
+            child: Container(
+              height: 54,
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.withOpacity(.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 12, right: 5, bottom: 8),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: "Search $category ...",
+                        ),
+                        onSubmitted: (String value) {
+                          model.getCategoryData(searchQuery: value);
+                        },
+                        onChanged: (String searchQuery) {
+                          model.getCategoryData(searchQuery: searchQuery);
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        model.getCategoryData(searchQuery: searchText);
+                      },
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                        size: 45,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

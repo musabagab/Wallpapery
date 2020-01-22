@@ -14,6 +14,7 @@ class TrendingModel extends BaseModel {
     setState(ViewState.Busy);
     hitsList = await apiService.getCategoryData(
         search: searchQuery); // for specfic category
+    images.clear();
     for (var item in hitsList) {
       if (item.largeImageUrl != null) {
         images.add(item.largeImageUrl);
