@@ -25,8 +25,9 @@ class TrendingView extends StatelessWidget {
             ),
             model.state == ViewState.Busy
                 ? Container(
-                    height: 400,
-                    child: Center(
+                    height: 200,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
                       child: CircularProgressIndicator(),
                     ),
                   )

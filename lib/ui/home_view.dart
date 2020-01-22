@@ -23,13 +23,15 @@ class _HomeViewState extends State<HomeView> {
       onModelReady: (model) => model.getImagesData(),
       builder: (context, child, model) => Scaffold(
         bottomNavigationBar: _buildBottomNavigationBar(model),
-        body:
-            SafeArea(child: showTabView(model.getCurrentTab(), context, model)),
+        body: SafeArea(
+          child: showTabView(model.getCurrentTab(), context, model),
+        ),
       ),
     );
   }
 
   showTabView(currentTabIndex, context, model) {
+    // change the body depedning of the current tab
     if (currentTabIndex == 0) {
       return _buildHomeBody(model, context); // HomeView
     } else if (currentTabIndex == 1) {
@@ -56,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
                 fontFamily: 'Pacifico'),
           ),
           SizedBox(
-            height: 8,
+            height: 12,
           ),
           Container(
             height: 350.0,
@@ -182,7 +184,9 @@ class _HomeViewState extends State<HomeView> {
               // end of the list
               return Container();
             }
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
           return buidlCategoryItem(allCategoriesImages, index, categories);
         },
@@ -225,11 +229,13 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               child: Center(
-                child: Text(categories[index],
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Booster')),
+                child: Text(
+                  categories[index],
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Booster'),
+                ),
               ),
             ),
           ),
@@ -243,7 +249,9 @@ class _HomeViewState extends State<HomeView> {
     switch (state) {
       case ViewState.Busy:
         return Align(
-            alignment: Alignment.center, child: CircularProgressIndicator());
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(),
+        );
       case ViewState.Retrieved:
       default:
         return CarouselSlider(
@@ -279,18 +287,19 @@ class _HomeViewState extends State<HomeView> {
       child: Builder(
         builder: (BuildContext context) {
           return Container(
-              width: 250,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Hero(
-                tag: imageUrl,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                  ),
+            width: 250,
+            margin: EdgeInsets.symmetric(horizontal: 5.0),
+            child: Hero(
+              tag: imageUrl,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
                 ),
-              ));
+              ),
+            ),
+          );
         },
       ),
     );
