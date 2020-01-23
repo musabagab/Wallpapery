@@ -13,9 +13,11 @@ class DetailsModel extends BaseModel {
   ApiService apiService = locator<ApiService>();
   AppDatabase _appDatabase = locator<AppDatabase>();
   Hit selectedHit;
-
-  void setDeatilsHit(Hit selectedHit) {
+  bool isFavourties = false;
+  FavouritesImagesTableData favouritesImagesTableData;
+  void setDeatilsHit(Hit selectedHit) async {
     this.selectedHit = selectedHit;
+    isFavourties = await isFavourites(selectedHit);
   }
 
   void saveImage(String imageUrl, context) async {
@@ -31,16 +33,45 @@ class DetailsModel extends BaseModel {
   }
 
   Future saveToFavourites() async {
-    var result = await _appDatabase.insertImage(FavouritesImagesTableData(
-      id: selectedHit.id,
-      largeImageUrl: selectedHit.largeImageUrl,
-      views: selectedHit.views,
-      userImageUrl: selectedHit.userImageUrl,
-      likes: selectedHit.likes,
-      downloads: selectedHit.downloads,
-      imagesize: selectedHit.imageSize,
-      comments: selectedHit.comments,
-    ));
+    Future result;
+    try {
+      result = await _appDatabase.insertImage(FavouritesImagesTableData(
+        id: selectedHit.id,
+        largeImageUrl: selectedHit.largeImageUrl,
+        views: selectedHit.views,
+        userImageUrl: selectedHit.userImageUrl,
+        likes: selectedHit.likes,
+        downloads: selectedHit.downloads,
+        imagesize: selectedHit.imageSize,
+        comments: selectedHit.comments,
+      ));
+    } catch (e) {
+      print('Error ' + e.toString());
+    }
+    print('Results ' + result.toString());
+    notifyListeners();
     return result;
+  }
+
+  Future<bool> isFavourites(selectedHit) async {
+    bool isFavorite = false;
+    List<FavouritesImagesTableData> allFavourites =
+        await _appDatabase.getAllFavourtiesImages();
+
+    for (int i = 0; i < allFavourites.length; i++) {
+      if (allFavourites[i].largeImageUrl == selectedHit.largeImageUrl) {
+        print('its favroutires');
+        isFavorite = true;
+        favouritesImagesTableData = allFavourites[i];
+        break;
+      }
+    }
+    notifyListeners();
+    return isFavorite;
+  }
+
+  void removeFavourites() async {
+    await _appDatabase.deleteImage(favouritesImagesTableData);
+    notifyListeners();
   }
 }

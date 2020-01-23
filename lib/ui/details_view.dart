@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/details_model.dart';
@@ -80,11 +81,35 @@ class DetailsView extends StatelessWidget {
                           size: 30,
                         ),
                       ),
-                      Icon(
-                        Icons.favorite_border,
-                        color: Colors.white,
-                        size: 30,
-                      ),
+                      GestureDetector(
+                          onTap: () async {
+                            if (model.isFavourties) {
+                              // remove from fav
+                              model.removeFavourites();
+                              Toast.show(
+                                  "Image Removed from favourites", context,
+                                  duration: Toast.LENGTH_LONG,
+                                  gravity: Toast.CENTER,
+                                  backgroundColor: Colors.blueAccent);
+                            } else {
+                              await model.saveToFavourites();
+                              Toast.show("Image Added from favourites", context,
+                                  duration: Toast.LENGTH_LONG,
+                                  gravity: Toast.CENTER,
+                                  backgroundColor: Colors.blueAccent);
+                            }
+                          },
+                          child: model.isFavourties
+                              ? Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                  size: 30,
+                                )
+                              : Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.white,
+                                  size: 30,
+                                )),
                       GestureDetector(
                         child: Icon(
                           Icons.info_outline,
