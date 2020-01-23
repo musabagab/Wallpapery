@@ -37,6 +37,7 @@ class DetailsModel extends BaseModel {
     var result;
     try {
       result = await _appDatabase.insertImage(FavouritesImagesTableData(
+        id: selectedHit.id,
         largeImageUrl: selectedHit.largeImageUrl,
         views: selectedHit.views,
         userImageUrl: selectedHit.userImageUrl,
@@ -58,25 +59,27 @@ class DetailsModel extends BaseModel {
     List<FavouritesImagesTableData> allFavourites =
         await _appDatabase.getAllFavourtiesImages();
     for (int i = 0; i < allFavourites.length; i++) {
-      if (allFavourites[i].largeImageUrl == selectedHit.largeImageUrl) {
+      if (allFavourites[i].id == selectedHit.id) {
         print('its favroutires');
         isFavourites = true;
         favouritesImagesObject = allFavourites[i];
-        print('Object Saved ' + favouritesImagesObject.toString());
+        print('Object Saved ');
         break;
       }
     }
     notifyListeners();
   }
 
-  void removeFavourites() async {
+  Future removeFavourites() async {
+    var results;
     if (favouritesImagesObject == null) {
       print('FavImageData is null');
-      return;
+      return results;
     }
-    await _appDatabase.deleteImage(favouritesImagesObject);
+    results = await _appDatabase.deleteImage(favouritesImagesObject);
     isFavourites = false;
     favouritesImagesObject = null;
     notifyListeners();
+    return results;
   }
 }

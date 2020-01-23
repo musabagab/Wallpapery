@@ -84,7 +84,7 @@ class DetailsView extends StatelessWidget {
                           onTap: () async {
                             if (model.isFavourites) {
                               // remove from fav
-                              model.removeFavourites();
+                              await model.removeFavourites();
                               Toast.show(
                                   "Image Removed from favourites", context,
                                   duration: Toast.LENGTH_LONG,
