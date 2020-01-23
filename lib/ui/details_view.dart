@@ -121,7 +121,7 @@ class DetailsView extends StatelessWidget {
                               context: context,
                               barrierDismissible: true,
                               builder: (_) => AlertDialog(
-                                    title: Text('Image Information'),
+                                    title: Text('About Image'),
                                     actions: <Widget>[
                                       FlatButton(
                                         onPressed: () {
@@ -153,44 +153,52 @@ class DetailsView extends StatelessWidget {
         child: Column(
           children: <Widget>[
             CircleAvatar(
-              radius: 40,
+              radius: 35,
               backgroundImage: NetworkImage(selectedHit.userImageUrl),
             ),
-            SizedBox(
-              height: 20,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('User Image'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Downloads: '),
+                Text(
+                  'Downloads: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 Text(selectedHit.downloads.toString()),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Likes: '),
+                Text('Likes: ', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(selectedHit.likes.toString()),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Comments: '),
+                Text('Comments: ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(selectedHit.comments.toString()),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Views: '),
+                Text('Views: ', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(selectedHit.views.toString()),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Image Size: '),
+                Text(
+                  'Image Size: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 Text(selectedHit.imageSize.toString() + ' KB'),
               ],
             )
