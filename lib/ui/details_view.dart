@@ -42,8 +42,8 @@ class DetailsView extends StatelessWidget {
                     color: Colors.white54),
                 child: GestureDetector(
                   onTap: () {
-                    // navigate back
-                    Navigator.of(context).pop();
+                    // navigate back and return if the image is removed or not
+                    Navigator.of(context).pop(!model.isFavourites);
                   },
                   child: Icon(
                     Icons.arrow_back_ios,

@@ -14,11 +14,11 @@ class FavourtiresView extends StatelessWidget {
       builder: (context, child, model) => Scaffold(
           body: (model.state == ViewState.Busy)
               ? Center(child: CircularProgressIndicator())
-              : buildImageGrid(model.list, context)),
+              : buildImageGrid(model.list, context, model)),
     );
   }
 
-  buildImageGrid(List<FavouritesImagesTableData> images, context) {
+  buildImageGrid(List<FavouritesImagesTableData> images, context, model) {
     print(images.toString());
     if (images.length == 0) {
       return Center(child: Text('No Favourites added'));
@@ -45,9 +45,15 @@ class FavourtiresView extends StatelessWidget {
                     imageSize: image.imagesize);
                 // navigate to deatils screen
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsView(selectedHit)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailsView(selectedHit)))
+                    .then((isRemoved) {
+                  if (isRemoved) {
+                    // rebuilt if an image was removed
+                    model.getMyFavourites();
+                  }
+                });
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
