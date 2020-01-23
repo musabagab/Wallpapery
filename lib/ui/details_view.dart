@@ -117,6 +117,21 @@ class DetailsView extends StatelessWidget {
                         ),
                         onTap: () {
                           // Show Image information dialog
+                          showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (_) => AlertDialog(
+                                    title: Text('Image Information'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('OK'),
+                                      )
+                                    ],
+                                    content: buildDialogContents(),
+                                  ));
                         },
                       )
                     ],
@@ -124,6 +139,61 @@ class DetailsView extends StatelessWidget {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildDialogContents() {
+    return Container(
+      width: 200,
+      height: 200,
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(selectedHit.userImageUrl),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Downloads: '),
+                Text(selectedHit.downloads.toString()),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Likes: '),
+                Text(selectedHit.likes.toString()),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Comments: '),
+                Text(selectedHit.comments.toString()),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Views: '),
+                Text(selectedHit.views.toString()),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Image Size: '),
+                Text(selectedHit.imageSize.toString() + ' KB'),
+              ],
+            )
           ],
         ),
       ),
