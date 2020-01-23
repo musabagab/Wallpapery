@@ -6,8 +6,13 @@ class FavourtiresView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<FavouritesModel>(
+      onModelReady: (model) => model.getMyFavourites(),
       builder: (context, child, model) => Scaffold(
-        body: Center(child: Text(this.runtimeType.toString())),
+        body: Center(
+          child: Text(
+            this.runtimeType.toString(),
+          ),
+        ),
       ),
     );
   }

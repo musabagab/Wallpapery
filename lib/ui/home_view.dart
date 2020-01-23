@@ -9,6 +9,7 @@ import 'package:wallpapery/service_locator.dart';
 import 'package:wallpapery/services/api_service.dart';
 import 'package:wallpapery/ui/base_view.dart';
 import 'package:wallpapery/ui/details_view.dart';
+import 'package:wallpapery/ui/favourites_view.dart';
 import 'package:wallpapery/ui/trending_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
       );
     } else {
       return Container(
-        child: Center(child: Text('Favourites')), //FavView
+        child: FavourtiresView(), //FavView
       );
     }
   }
