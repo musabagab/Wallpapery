@@ -18,7 +18,7 @@ class FavouritesImagesTableData extends DataClass
   final int downloads;
   final int imagesize;
   FavouritesImagesTableData(
-      {@required this.id,
+      {this.id,
       @required this.largeImageUrl,
       @required this.userImageUrl,
       @required this.likes,
