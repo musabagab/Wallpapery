@@ -4,11 +4,11 @@ import 'package:wallpapery/service_locator.dart';
 
 class FavouritesModel extends BaseModel {
   AppDatabase _appDatabase = locator<AppDatabase>();
-  List<FavouritesImagesTableData> list;
+  List<FavouritesImagesTableData> imagesList;
 
   Future getMyFavourites() async {
     setState(ViewState.Busy);
-    list = await _appDatabase.getAllFavourtiesImages();
+    imagesList = await _appDatabase.getAllFavourtiesImages();
     setState(ViewState.Retrieved);
   }
 }

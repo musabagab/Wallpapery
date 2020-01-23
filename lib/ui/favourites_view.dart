@@ -14,7 +14,7 @@ class FavourtiresView extends StatelessWidget {
       builder: (context, child, model) => Scaffold(
           body: (model.state == ViewState.Busy)
               ? Center(child: CircularProgressIndicator())
-              : buildImageGrid(model.list, context, model)),
+              : buildImageGrid(model.imagesList, context, model)),
     );
   }
 
