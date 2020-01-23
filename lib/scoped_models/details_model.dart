@@ -25,7 +25,8 @@ class DetailsModel extends BaseModel {
     setState(ViewState.Busy);
     var res = await http.get(imageUrl);
     // save it
-    await ImagePickerSaver.saveFile(fileData: res.bodyBytes);
+    await ImagePickerSaver.saveFile(
+        fileData: res.bodyBytes, title: imageUrl, description: imageUrl);
     Toast.show("Image saved to gallery", context,
         duration: Toast.LENGTH_LONG,
         gravity: Toast.CENTER,
