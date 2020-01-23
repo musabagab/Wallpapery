@@ -7,7 +7,6 @@ import 'package:wallpapery/ui/base_view.dart';
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
-
   DetailsView(this.selectedHit);
 
   @override
@@ -83,7 +82,7 @@ class DetailsView extends StatelessWidget {
                       ),
                       GestureDetector(
                           onTap: () async {
-                            if (model.isFavourties) {
+                            if (model.isFavourites) {
                               // remove from fav
                               model.removeFavourites();
                               Toast.show(
@@ -99,7 +98,7 @@ class DetailsView extends StatelessWidget {
                                   backgroundColor: Colors.blueAccent);
                             }
                           },
-                          child: model.isFavourties
+                          child: model.isFavourites
                               ? Icon(
                                   Icons.favorite,
                                   color: Colors.white,

@@ -13,11 +13,12 @@ class DetailsModel extends BaseModel {
   ApiService apiService = locator<ApiService>();
   AppDatabase _appDatabase = locator<AppDatabase>();
   Hit selectedHit;
-  bool isFavourties = false;
+  bool isFavourites = false;
+
   FavouritesImagesTableData favouritesImagesTableData;
-  void setDeatilsHit(Hit selectedHit) async {
+  void setDeatilsHit(Hit selectedHit) {
     this.selectedHit = selectedHit;
-    isFavourties = await isFavourites(selectedHit);
+    isImageFavourites(selectedHit);
   }
 
   void saveImage(String imageUrl, context) async {
@@ -32,11 +33,10 @@ class DetailsModel extends BaseModel {
     setState(ViewState.Retrieved);
   }
 
-  Future saveToFavourites() async {
-    Future result;
+  saveToFavourites() async {
+    var result;
     try {
       result = await _appDatabase.insertImage(FavouritesImagesTableData(
-        id: selectedHit.id,
         largeImageUrl: selectedHit.largeImageUrl,
         views: selectedHit.views,
         userImageUrl: selectedHit.userImageUrl,
@@ -45,33 +45,32 @@ class DetailsModel extends BaseModel {
         imagesize: selectedHit.imageSize,
         comments: selectedHit.comments,
       ));
+      isFavourites = true;
     } catch (e) {
       print('Error ' + e.toString());
+      isFavourites = false;
     }
     print('Results ' + result.toString());
     notifyListeners();
-    return result;
   }
 
-  Future<bool> isFavourites(selectedHit) async {
-    bool isFavorite = false;
+  isImageFavourites(selectedHit) async {
     List<FavouritesImagesTableData> allFavourites =
         await _appDatabase.getAllFavourtiesImages();
-
     for (int i = 0; i < allFavourites.length; i++) {
       if (allFavourites[i].largeImageUrl == selectedHit.largeImageUrl) {
         print('its favroutires');
-        isFavorite = true;
+        isFavourites = true;
         favouritesImagesTableData = allFavourites[i];
         break;
       }
     }
-    notifyListeners();
-    return isFavorite;
   }
 
   void removeFavourites() async {
     await _appDatabase.deleteImage(favouritesImagesTableData);
+    isFavourites = false;
+    favouritesImagesTableData = null;
     notifyListeners();
   }
 }
