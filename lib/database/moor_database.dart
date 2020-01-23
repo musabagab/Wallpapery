@@ -24,8 +24,8 @@ class AppDatabase extends _$AppDatabase {
 
   Future<List<FavouritesImagesTableData>> getAllFavourtiesImages() =>
       select(favouritesImagesTable).get();
-  Future insertMedicine(FavouritesImagesTableData image) =>
+  Future insertImage(FavouritesImagesTableData image) =>
       into(favouritesImagesTable).insert(image);
-  Future deleteMedicine(FavouritesImagesTableData image) =>
+  Future deleteImage(FavouritesImagesTableData image) =>
       delete(favouritesImagesTable).delete(image);
 }
