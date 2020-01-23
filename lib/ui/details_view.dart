@@ -92,7 +92,7 @@ class DetailsView extends StatelessWidget {
                                   backgroundColor: Colors.blueAccent);
                             } else {
                               await model.saveToFavourites();
-                              Toast.show("Image Added from favourites", context,
+                              Toast.show("Image Added to favourites", context,
                                   duration: Toast.LENGTH_LONG,
                                   gravity: Toast.CENTER,
                                   backgroundColor: Colors.blueAccent);
