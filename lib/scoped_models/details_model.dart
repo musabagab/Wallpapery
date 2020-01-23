@@ -14,8 +14,8 @@ class DetailsModel extends BaseModel {
   AppDatabase _appDatabase = locator<AppDatabase>();
   Hit selectedHit;
   bool isFavourites = false;
+  FavouritesImagesTableData favouritesImagesObject;
 
-  FavouritesImagesTableData favouritesImagesTableData;
   void setDeatilsHit(Hit selectedHit) {
     this.selectedHit = selectedHit;
     isImageFavourites(selectedHit);
@@ -45,7 +45,7 @@ class DetailsModel extends BaseModel {
         imagesize: selectedHit.imageSize,
         comments: selectedHit.comments,
       ));
-      isFavourites = true;
+      isImageFavourites(selectedHit);
     } catch (e) {
       print('Error ' + e.toString());
       isFavourites = false;
@@ -61,16 +61,22 @@ class DetailsModel extends BaseModel {
       if (allFavourites[i].largeImageUrl == selectedHit.largeImageUrl) {
         print('its favroutires');
         isFavourites = true;
-        favouritesImagesTableData = allFavourites[i];
+        favouritesImagesObject = allFavourites[i];
+        print('Object Saved ' + favouritesImagesObject.toString());
         break;
       }
     }
+    notifyListeners();
   }
 
   void removeFavourites() async {
-    await _appDatabase.deleteImage(favouritesImagesTableData);
+    if (favouritesImagesObject == null) {
+      print('FavImageData is null');
+      return;
+    }
+    await _appDatabase.deleteImage(favouritesImagesObject);
     isFavourites = false;
-    favouritesImagesTableData = null;
+    favouritesImagesObject = null;
     notifyListeners();
   }
 }
