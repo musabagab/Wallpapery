@@ -19,7 +19,7 @@ class TrendingView extends StatelessWidget {
             SizedBox(
               height: 16,
             ),
-            buildSearchBar(category, model),
+            buildSearchBar(category, model, context),
             SizedBox(
               height: 16,
             ),
@@ -38,17 +38,23 @@ class TrendingView extends StatelessWidget {
     );
   }
 
-  buildSearchBar(String category, TrendingModel model) {
+  buildSearchBar(String category, TrendingModel model, BuildContext context) {
     String searchText = "";
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Icon(
-            Icons.sort,
-            color: Colors.black,
-            size: 45,
+          GestureDetector(
+            onTap: () {
+              // show dailog to change order by and page count
+              showFilterDialog(context, model);
+            },
+            child: Icon(
+              Icons.sort,
+              color: Colors.black,
+              size: 45,
+            ),
           ),
           SizedBox(
             width: 15,
@@ -101,6 +107,80 @@ class TrendingView extends StatelessWidget {
       ),
     );
   }
+}
+
+void showFilterDialog(BuildContext context, TrendingModel model) {
+  showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) => AlertDialog(
+            title: Text(
+              'Filter Options',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              FlatButton(
+                onPressed: () {
+                  model.getCategoryData();
+                },
+                child: Text('Apply'),
+              ),
+            ],
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) =>
+                  Container(
+                width: double.infinity,
+                height: 150,
+                child: Column(
+                  children: <Widget>[
+                    Text('How the results should be ordered:'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ChoiceChip(
+                          label: Text('Popular'),
+                          selected: (model.apiService.order == 'popular')
+                              ? true
+                              : false,
+                          onSelected: (bool selected) {
+                            print('PopularChip ' + selected.toString());
+                            String newOption = 'latest';
+                            if (selected) {
+                              newOption = 'popular';
+                            }
+                            setState(() => model.apiService.order = newOption);
+                          },
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        ChoiceChip(
+                          label: Text('Latest'),
+                          selected: (model.apiService.order == 'latest')
+                              ? true
+                              : false,
+                          onSelected: (bool selected) {
+                            print('LatestChip ' + selected.toString());
+                            String newOption = 'popular';
+                            if (selected) {
+                              newOption = 'latest';
+                            }
+                            setState(() => model.apiService.order = newOption);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ));
 }
 
 buildImageGrid(List<String> images, List<Hit> hitsList, context) {
