@@ -14,135 +14,146 @@ class DetailsView extends StatelessWidget {
     return BaseView<DetailsModel>(
       onModelReady: (model) => model.setDeatilsHit(selectedHit),
       builder: (context, child, model) => SafeArea(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: double.infinity, // full screen
-              child: Hero(
-                tag: model.selectedHit.largeImageUrl,
-                child: Image.network(
-                  model.selectedHit.largeImageUrl,
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-            Center(
-              child: model.state == ViewState.Busy
-                  ? CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                    )
-                  : Container(),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white54),
-                child: GestureDetector(
-                  onTap: () {
-                    // navigate back and return if the image is removed or not
-                    Navigator.of(context).pop(!model.isFavourites);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                    size: 20,
+        child: WillPopScope(
+          onWillPop: () {
+            _onBackPressed(context, model);
+            return;
+          },
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: double.infinity, // full screen
+                child: Hero(
+                  tag: model.selectedHit.largeImageUrl,
+                  child: Image.network(
+                    model.selectedHit.largeImageUrl,
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    color: Colors.blueGrey.withOpacity(.45),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45))),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 12.0, right: 12.0, top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () async {
-                          model.saveImage(selectedHit.largeImageUrl, context);
-                        },
-                        child: Icon(
-                          Icons.file_download,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
-                      GestureDetector(
-                          onTap: () async {
-                            if (model.isFavourites) {
-                              // remove from fav
-                              await model.removeFavourites();
-                              Toast.show(
-                                  "Image Removed from favourites", context,
-                                  duration: Toast.LENGTH_LONG,
-                                  gravity: Toast.CENTER,
-                                  backgroundColor: Colors.blueAccent);
-                            } else {
-                              await model.saveToFavourites();
-                              Toast.show("Image Added to favourites", context,
-                                  duration: Toast.LENGTH_LONG,
-                                  gravity: Toast.CENTER,
-                                  backgroundColor: Colors.blueAccent);
-                            }
-                          },
-                          child: model.isFavourites
-                              ? Icon(
-                                  Icons.favorite,
-                                  color: Colors.white,
-                                  size: 30,
-                                )
-                              : Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                  size: 30,
-                                )),
-                      GestureDetector(
-                        child: Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        onTap: () {
-                          // Show Image information dialog
-                          showDialog(
-                              context: context,
-                              barrierDismissible: true,
-                              builder: (_) => AlertDialog(
-                                    title: Text('About Image'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      )
-                                    ],
-                                    content: buildDialogContents(),
-                                  ));
-                        },
+              Center(
+                child: model.state == ViewState.Busy
+                    ? CircularProgressIndicator(
+                        backgroundColor: Colors.white,
                       )
-                    ],
+                    : Container(),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white54),
+                  child: GestureDetector(
+                    onTap: () {
+                      // navigate back and return if the image is removed or not
+                      _onBackPressed(context, model);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey.withOpacity(.45),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(45),
+                          topRight: Radius.circular(45))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12.0, right: 12.0, top: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () async {
+                            model.saveImage(selectedHit.largeImageUrl, context);
+                          },
+                          child: Icon(
+                            Icons.file_download,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () async {
+                              if (model.isFavourites) {
+                                // remove from fav
+                                await model.removeFavourites();
+                                Toast.show(
+                                    "Image Removed from favourites", context,
+                                    duration: Toast.LENGTH_LONG,
+                                    gravity: Toast.CENTER,
+                                    backgroundColor: Colors.blueAccent);
+                              } else {
+                                await model.saveToFavourites();
+                                Toast.show("Image Added to favourites", context,
+                                    duration: Toast.LENGTH_LONG,
+                                    gravity: Toast.CENTER,
+                                    backgroundColor: Colors.blueAccent);
+                              }
+                            },
+                            child: model.isFavourites
+                                ? Icon(
+                                    Icons.favorite,
+                                    color: Colors.white,
+                                    size: 30,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.white,
+                                    size: 30,
+                                  )),
+                        GestureDetector(
+                          child: Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          onTap: () {
+                            // Show Image information dialog
+                            showDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (_) => AlertDialog(
+                                      title: Text('About Image'),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        )
+                                      ],
+                                      content: buildDialogContents(),
+                                    ));
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _onBackPressed(BuildContext context, DetailsModel model) {
+    // navigate back and return if the image is removed or not
+    Navigator.of(context).pop(!model.isFavourites);
   }
 
   Widget buildDialogContents() {
