@@ -25,6 +25,7 @@ class ApiService {
     baseurl =
         "https://pixabay.com/api/?key=$API_KEY&per_page=$pageCount&order=$order";
     print('ordered by ' + order);
+    print('Page count ' + pageCount.toString());
     String url = baseurl + '&category=$category';
     if (search != null) {
       // add the search query to the url

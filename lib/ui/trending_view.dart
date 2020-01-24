@@ -128,6 +128,7 @@ void showFilterDialog(BuildContext context, TrendingModel model) {
               FlatButton(
                 onPressed: () {
                   model.getCategoryData();
+                  Navigator.of(context).pop();
                 },
                 child: Text('Apply'),
               ),
@@ -140,6 +141,9 @@ void showFilterDialog(BuildContext context, TrendingModel model) {
                 child: Column(
                   children: <Widget>[
                     Text('How the results should be ordered:'),
+                    SizedBox(
+                      height: 12,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -175,6 +179,24 @@ void showFilterDialog(BuildContext context, TrendingModel model) {
                           },
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text('How many results per search:')),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "Accepted values: (3 - 200)",
+                      ),
+                      onChanged: (value) {
+                        print(value);
+                        int newSearchCount = int.parse(value);
+                        if (newSearchCount >= 3 && newSearchCount <= 200) {
+                          model.apiService.pageCount = newSearchCount;
+                        }
+                      },
                     ),
                   ],
                 ),
