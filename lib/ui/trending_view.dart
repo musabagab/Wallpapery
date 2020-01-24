@@ -206,7 +206,6 @@ void showFilterDialog(BuildContext context, TrendingModel model) {
 }
 
 buildImageGrid(List<String> images, List<Hit> hitsList, context) {
-  print(images.toString());
   return Expanded(
       child: GridView.count(
           crossAxisCount: 2,
