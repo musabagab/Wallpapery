@@ -16,7 +16,7 @@
   <br>
 </p>
 <p><strong><span style="font-size: 
-      35px;">Getting Started</span></strong></p>
+      50px;">Getting Started</span></strong></p>
 <ol>
   <li><strong><span style="font-size: 18px;">Download or clone the repo</span></strong></li>
   <li><strong>Go to 
