@@ -20,7 +20,7 @@
 <ol>
   <li><strong><span style="font-size: 18px;">Download or clone the repo</span></strong></li>
   <li><strong>Go to 
-      <a href="//Pixabay.com">Pixbay.com</a>
+      <a href="//Pixabay.com">Pixabay.com</a>
     </strong></li>
   <li><strong>Signup or login to get API KEY</strong></li>
   <li><strong>Open project and go to <span style="background-color: rgb(65, 168, 95);">&nbsp;lib/services/api_service.dart</span></strong></li>
