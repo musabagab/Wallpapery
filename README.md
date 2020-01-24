@@ -9,36 +9,27 @@
   <li>Save wallpapers to your gallery</li>
   <li>Add wallpapers to favourite list</li>
 </ul>
-<p><span><strong>App Screenshots:</strong></span></p>
+<p><strong><span style="font-size: 24px;">App Screenshots:</span></strong></p>
 <p>
   <br>
+  <a href="https://imgur.com/5iFpox3">
+    <img src="https://i.imgur.com/5iFpox3.png" title="source: imgur.com">
+  </a>
+  <br>
+  <a href="https://imgur.com/bI7BwLW"><img src="https://i.imgur.com/bI7BwLW.png" title="source: imgur.com" /></a>
+  <br>
+  <a href="https://imgur.com/UrP6JoZ"><img src="https://i.imgur.com/UrP6JoZ.png" title="source: imgur.com" /></a>
+  <br>
+  <a href="https://imgur.com/X5Y9deI"><img src="https://i.imgur.com/X5Y9deI.png" title="source: imgur.com" /></a>
+  <br>
+  <a href="https://imgur.com/LYpwbYz"><img src="https://i.imgur.com/LYpwbYz.png" title="source: imgur.com" /></a>
+  <br>
 </p>
-<p>
-  <a href="https://imgur.com/CtFgbLW">
-    <img src="https://i.imgur.com/CtFgbLW.png" title="source: imgur.com">
-  </a>
-</p>
-<p>
-  <a href="https://imgur.com/nKhuZh5">
-    <img src="https://i.imgur.com/nKhuZh5.png" title="source: imgur.com">
-  </a>
-</p>
-<p>
-  <a href="https://imgur.com/ay2kLTZ">
-    <img src="https://i.imgur.com/ay2kLTZ.png" title="source: imgur.com">
-  </a>
-  <a href="https://imgur.com/TZTiIAe">
-    <img src="https://i.imgur.com/TZTiIAe.png" title="source: imgur.com">
-  </a>
-  <a href="https://imgur.com/Y1NZ6dP">
-    <img src="https://i.imgur.com/Y1NZ6dP.png" title="source: imgur.com">
-  </a>
-</p>
-<p><strong><span>Getting Started</span></strong></p>
+<p><strong>Getting Started</strong></p>
 <ol>
   <li><strong><span style="font-size: 18px;">Download or clone the repo</span></strong></li>
   <li><strong>Go to 
-      <a href="//Pixabay.com">Pixabay.com</a> &nbsp;&nbsp;&nbsp;
+      <a href="//Pixabay.com">Pixabay.com</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </strong></li>
   <li><strong>Signup or login to get API KEY</strong></li>
   <li><strong>Open project and go to <span style="background-color: rgb(65, 168, 95);">&nbsp;lib/services/api_service.dart</span></strong></li>
