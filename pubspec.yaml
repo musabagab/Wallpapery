@@ -29,6 +29,7 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   toast: ^0.1.5
   moor_flutter: ^2.0.0
+  permission_handler: ^4.0.0  
 dev_dependencies:
   flutter_test:
     sdk: flutter

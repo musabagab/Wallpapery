@@ -4,6 +4,7 @@ import 'package:wallpapery/enums/view_states.dart';
 import 'package:wallpapery/models/PhotosModel.dart';
 import 'package:wallpapery/scoped_models/details_model.dart';
 import 'package:wallpapery/ui/base_view.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DetailsView extends StatelessWidget {
   final Hit selectedHit;
@@ -77,7 +78,34 @@ class DetailsView extends StatelessWidget {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () async {
-                            model.saveImage(selectedHit.largeImageUrl, context);
+                            // check for storage permission first
+                            PermissionStatus permission =
+                                await PermissionHandler().checkPermissionStatus(
+                                    PermissionGroup.storage);
+                            if (permission == PermissionStatus.granted) {
+                              // permission is granted
+                              model.saveImage(
+                                  selectedHit.largeImageUrl, context);
+                            } else {
+                              // request permission
+                              Map<PermissionGroup, PermissionStatus>
+                                  permissions = await PermissionHandler()
+                                      .requestPermissions(
+                                          [PermissionGroup.storage]);
+                              // check status after requresting
+                              if (permissions[0] == PermissionStatus.granted) {
+                                model.saveImage(
+                                    selectedHit.largeImageUrl, context);
+                              } else {
+                                // show a taost
+                                Toast.show(
+                                    "Permission is required to save image",
+                                    context,
+                                    duration: Toast.LENGTH_LONG,
+                                    gravity: Toast.CENTER,
+                                    backgroundColor: Colors.blueAccent);
+                              }
+                            }
                           },
                           child: Icon(
                             Icons.file_download,
