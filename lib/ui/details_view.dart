@@ -88,12 +88,15 @@ class DetailsView extends StatelessWidget {
                                   selectedHit.largeImageUrl, context);
                             } else {
                               // request permission
-                              Map<PermissionGroup, PermissionStatus>
-                                  permissions = await PermissionHandler()
-                                      .requestPermissions(
-                                          [PermissionGroup.storage]);
+                              await PermissionHandler().requestPermissions(
+                                  [PermissionGroup.storage]);
                               // check status after requresting
-                              if (permissions[0] == PermissionStatus.granted) {
+                              PermissionStatus storagePermission =
+                                  await PermissionHandler()
+                                      .checkPermissionStatus(
+                                          PermissionGroup.storage);
+                              if (storagePermission ==
+                                  PermissionStatus.granted) {
                                 model.saveImage(
                                     selectedHit.largeImageUrl, context);
                               } else {
