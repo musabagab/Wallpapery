@@ -6,7 +6,7 @@ class ApiService {
   String category = 'travel'; //default
   String order = 'popular'; //default
 
-  final String API_KEY = '14921997-2f305f4f3ccc588248ffad6e2';
+  final String API_KEY = 'YOUR_API_KEY';
   String baseurl;
 
   ApiService() {
