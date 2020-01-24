@@ -40,16 +40,16 @@ class DetailsView extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white54),
-                  child: GestureDetector(
-                    onTap: () {
-                      // navigate back and return if the image is removed or not
-                      _onBackPressed(context, model);
-                    },
+                child: GestureDetector(
+                  onTap: () {
+                    // navigate back and return if the image is removed or not
+                    _onBackPressed(context, model);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(28),
+                        color: Colors.white54),
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
