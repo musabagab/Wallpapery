@@ -6,8 +6,8 @@
 <p><strong>App Features:</strong></p>
 <ul>
   <li>Search for over million of HD wallpapers</li>
-  <li>Save wallpaper to your gallery</li>
-  <li>Add wallpaper to favourite list</li>
+  <li>Save wallpapers to your gallery</li>
+  <li>Add wallpapers to favourite list</li>
 </ul>
 <p><span style="font-size: 
       24px;"><strong>App Screenshots:</strong></span></p>
@@ -16,7 +16,7 @@
   <br>
 </p>
 <p><strong><span style="font-size: 
-      24px;">Getting Started</span></strong></p>
+      35px;">Getting Started</span></strong></p>
 <ol>
   <li><strong><span style="font-size: 18px;">Download or clone the repo</span></strong></li>
   <li><strong>Go to 
