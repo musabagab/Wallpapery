@@ -3,7 +3,8 @@
 <p>&nbsp;</p>
 <p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pquQ0CPa8lU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[![Watch App Video]](https://www.youtube.com/watch?v=pquQ0CPa8lU)
 
   <br>
 </p>
