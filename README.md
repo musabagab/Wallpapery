@@ -2,7 +2,7 @@
 <p><strong>App built with Flutter and Dart &nbsp;</strong></p>
 <p>&nbsp;</p>
 <p>
-[[Watch App Video]](https://www.youtube.com/watch?v=pquQ0CPa8lU)
+[![Watch App Video]](https://www.youtube.com/watch?v=pquQ0CPa8lU)
 </p>
 <p>&nbsp;</p>
 <p><strong>App Features:</strong></p>
