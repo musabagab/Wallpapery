@@ -2,7 +2,9 @@
 <p><strong>App built with Flutter and Dart &nbsp;</strong></p>
 <p>&nbsp;</p>
 <p>
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/pquQ0CPa8lU?&amp;wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pquQ0CPa8lU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
   <br>
 </p>
 <p>&nbsp;</p>
