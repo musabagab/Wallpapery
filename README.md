@@ -13,7 +13,7 @@
   <li>Add wallpapers to favourite list</li>
 </ul>
 
-<p><strong>Getting Started</strong></p>
+<p><strong>Getting Started:</strong></p>
 <ol>
   <li><strong><span style="font-size: 18px;">Download or clone the repo</span></strong></li>
   <li><strong>Go to 
