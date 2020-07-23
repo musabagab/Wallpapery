@@ -8,7 +8,7 @@
 <p>&nbsp;</p>
 <p><strong>App Features:</strong></p>
 <ul>
-  <li>Search for over million of HD wallpapers</li>
+  <li>Search for over a million of HD wallpapers</li>
   <li>Save wallpapers to your gallery</li>
   <li>Add wallpapers to favourite list</li>
 </ul>
