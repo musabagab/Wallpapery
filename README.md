@@ -1,5 +1,5 @@
 <p><strong>Wallpapery App : Hd Wallpapers for your phone</strong></p>
-<p><strong>App built with Flutter and Dart &nbsp;</strong></p>
+<p><strong>App built with Flutter and Dart. &nbsp;</strong></p>
 <p>&nbsp;</p>
 <p>
  [![Watch the video]](https://www.youtube.com/watch?v=pquQ0CPa8lU)
